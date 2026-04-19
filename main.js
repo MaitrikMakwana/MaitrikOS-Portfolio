@@ -108,4 +108,4 @@ var OS={
 };
 
 // ---- BOOT ----
-addEventListener('load',function(){if(innerWidth<768){MobileTerminal.init();return;}Terminal.init();runBoot();});
+addEventListener('load',function(){Terminal.init();runBoot();});
