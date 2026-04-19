@@ -1,125 +1,85 @@
-# Hanzala Ghayas Abbasi – Cybersecurity Portfolio
-
-![Homepage Preview](src/png/Preview-card-min.png)
+# MaitrikOS - Interactive Cybersecurity Portfolio
 
 ## About Me
 
-I am Hanzala Ghayas Abbasi, a cybersecurity professional with a strong interest in digital rights and secure technology development. My work spans IT infrastructure, web application security, CTF event organization, and technical writing.
+I am **Maitrik Makwana**, a passionate cybersecurity enthusiast and Full Stack Developer. I am currently pursuing my B.Tech in Computer Engineering at CHARUSAT University (CGPA: 9.2). My core expertise lies in Vulnerability Assessment and Penetration Testing (VAPT), Cloud infrastructure, and modern web development.
 
 I specialize in:
+- Penetration testing & Vulnerability Assessment
+- Network Security & Cryptography
+- Secure Full Stack Web Development
+- Cloud Architecture & Automation
 
-- Penetration testing  
-- Vulnerability research  
-- Secure software development  
+I recently completed a Cybersecurity Internship at CyBrief Pvt Ltd, where I conducted full-lifecycle VAPT on vulnerable machines and identified critical security flaws. 
 
-I hold the **Practical Network Penetration Tester (PNPT)** certification, along with other credentials in network security, OSINT, privilege escalation, and ethical hacking. I actively participate in and contribute to the infosec community through CTFs, mentorship, and content creation.
-
-Currently, I am open to collaborations focused on practical cybersecurity improvements and advocating for a safer digital environment.
-
----
+Currently, I am actively seeking roles and collaborations focused on practical cybersecurity improvements, cloud engineering, and secure software development.
 
 ## Key Features
 
-- **Responsive design** for desktop and mobile  
-- **Interactive UI** with animations and parallax effects  
-- **Accessibility support** including ARIA labels and keyboard navigation  
-- **Modern aesthetic** with smooth transitions  
-- **SEO optimized** using meta tags and structured data  
+- **Interactive Linux Desktop UI**: A fully functional, web-based Linux desktop environment.
+- **Terminal System**: Custom-built command line with real commands (`whoami`, `ls`, `cat`, `nmap` simulated, `ssh`, `htop`).
+- **Dynamic Window Manager**: Draggable windows, minimize/maximize functionality, and Z-index management.
+- **Auto Tour Sequence**: Automated graphical tour demonstrating the core features of the OS.
+- **Easter Eggs**: Try running `sudo hire maitrik` or finding the hidden `.secret_flag`!
 
----
+## Projects Showcased
 
-## Website Sections
-
-- **Home**: Landing page with animation and contact link  
-- **About**: My background and journey in cybersecurity  
-- **Skills**: Tools and technologies I use regularly
-- **Certifications**: Security certifications, badges, and verified achievements
-- **Projects**: CTF write-ups, labs, and security demonstrations  
-- **Blogs**: Technical articles and cybersecurity walkthroughs  
-- **Settings**: Toggle sound and visual preferences  
-
-
+- **PyGuard**: Modern Network Traffic Metadata Capture & Analysis with ML IDS
+- **TAPMS**: Teams & Project Management platform built with React, Node, PostgreSQL, and Docker
+- **PeerConnect**: Community-owned Infrastructure-as-a-Service (IaaS) for secure Docker container sharing
+- **PII Data Sanitization Platform**: Full-stack platform for detecting and sanitizing PII powered by Python ML & React
+- **CloudEnthu**: Real-world AWS Cloud Practitioner notes and study CMS
 
 ## Technologies Used
 
-### Frontend
+### Frontend & OS Logic
+- HTML5, CSS3, Vanilla JavaScript
+- Canvas API for animations (Boot sequence, CRT effects)
 
-- HTML5, CSS3 (with custom animations and responsive layout)  
-- JavaScript for interactivity  
-- AOS (Animate On Scroll)  
-- Google Fonts  
+### Full Stack & Cloud (Via Projects)
+- React.js, Node.js, Express, Python (FastAPI/Django)
+- PostgreSQL, Prisma ORM, Redis, BullMQ
+- AWS (EC2, S3, IAM, Lambda), Docker, Linux, Git
 
-### Cybersecurity Tools
+### Cybersecurity & ML
+- Nmap, Burp Suite, Metasploit, Wireshark, SQLMap, Scapy
+- Presidio NLP, spaCy, Tesseract OCR, YOLOv8
 
-- Nmap, Burp Suite, Metasploit, Wireshark  
-- Kali Linux, OWASP ZAP, SQLMap  
-- Python, Maltego, John the Ripper, Hashcat  
-- Nessus  
-
-### Deployment
-
-- GitHub Pages  
-- SEO enhancements with JSON-LD structured data  
-
----
-
-## Installation
+## Installation & Usage
 
 Clone the repository:
 
 ```bash
-git clone https://github.com/hanzalaghayasabbasi/Portfolio.git
-cd Portfolio-main
+git clone https://github.com/MaitrikMakwana/MaitrikOS-Portfolio.git
+cd MaitrikOS-Portfolio
 ```
-## 💻 How to Use
 
-To view the site:
+### To view the site:
 
-- Open `index.html` directly in your browser  
-**or**
+Simply open `index.html` directly in your browser.
 
-- Run a local development server:
+**Or run a local server:**
 
 ```bash
-python3 -m http.server
-
+python3 -m http.server 8080
 ```
+
 ## 📁 Project Structure
 ```bash
-
-Portfolio-main/
-├── .github/                         # GitHub-specific settings and workflows
+MaitrikOS-Portfolio/
 ├── src/                             # Assets used across the site
-│   ├── mp3/                         # Audio files
-│   ├── png/                         # PNG images (e.g., logos, previews)
-│   ├── svg/                         # SVG icons (e.g., social icons, skill logos)
-│   ├── webp/                        # Optimized image formats
-│   ├── pdf/                         # Resume and supporting documents
-├── CNAME                            # Custom domain configuration for GitHub Pages
+├── index.html                       # Main OS Desktop File Manager & Environment
+├── effects.js                       # Terminal logic, commands, typing animation
+├── main.js                          # Window manager, boot sequence, project registry
+├── style.css                        # UI components, CRT styling, Window styling
 ├── README.md                        # Documentation and usage instructions (this file)
-├── click.png                        # Custom cursor click effect
-├── cursorr.png                      # Custom default cursor
-├── index.html                       # Main homepage of the portfolio
-├── linkCard.html                    # Interactive cards page linking to blog posts, tools, and CTF write-ups
-├── main.js                          # Handles menu toggle, animations, and interactivity
-├── professional-image-parallax.js   # Implements parallax scrolling effect
-├── style.css                        # Custom styling for layout, animations, and theme
-
-
+└── maitrik_final_resume.pdf         # Resume File
 ```
-
-## 📸 Live Demo  
-👉 Visit the interactive website: [![Website](https://img.shields.io/website?url=https%3A%2F%2Fhanzalaghayasabbasi.com)](https://hanzalaghayasabbasi.com)
-
-
----
 
 ## 📬 Contact
 
-[![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:hanzala.portfolio@gmail.com)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hanzalaghayasabbasi)
-[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=flat&logo=github&logoColor=white)](https://github.com/hanzalaghayasabbasi)
-[![Medium](https://img.shields.io/badge/Medium-12100E?style=flat&logo=medium&logoColor=white)](https://medium.com/@hanzalaghayasabbasi01)
+[![Email](https://img.shields.io/badge/Email-D14836?style=flat&logo=gmail&logoColor=white)](mailto:maitrikmakwana18@gmail.com)
+[![GitHub](https://img.shields.io/badge/GitHub-%23121011.svg?style=flat&logo=github&logoColor=white)](https://github.com/MaitrikMakwana)hields.io/badge/Medium-12100E?style=flat&logo=medium&logoColor=white)](https://medium.com/@hanzalaghayasabbasi01)
 
 
 
