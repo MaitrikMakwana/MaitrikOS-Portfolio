@@ -3,10 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MaitrikOS v1.0 -- Portfolio</title>
-  <meta name="description" content="Maitrik Makwana -- Cybersecurity Enthusiast & Developer. Interactive Linux desktop portfolio.">
+  <title>Maitrik Makwana | Cybersecurity & Cloud Professional Portfolio</title>
+  <meta name="description" content="Maitrik Makwana — B.Tech CE student at CHARUSAT (9.2 CGPA), Cybersecurity Intern at CyBrief, Cloud Enthusiast & 3D Animator. Portfolio built as an interactive Linux OS.">
+  <meta name="keywords" content="Maitrik Makwana, Cybersecurity, VAPT, Penetration Testing, Full Stack Developer, CHARUSAT, PyGuard, Network Security, Cloud Computing, Portfolio">
+  <meta name="author" content="Maitrik Makwana">
+  <meta property="og:title" content="Maitrik Makwana | MaitrikOS Portfolio">
+  <meta property="og:description" content="Interactive Linux-themed portfolio of Maitrik Makwana — CE Student, Cybersecurity Enthusiast, and Creative Professional.">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0d1117">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,6 +32,10 @@
       <div class="boot-version">v1.0 LTS -- Cybersecurity Distribution</div>
     </div>
     <div id="boot-log" class="boot-log"></div>
+    <div class="boot-actions">
+      <button type="button" class="boot-skip-btn" id="boot-skip">Skip boot</button>
+      <label class="boot-remember"><input type="checkbox" id="boot-remember" /> Always skip on future visits</label>
+    </div>
   </div>
 </div>
 
@@ -32,28 +43,42 @@
 <div id="login-screen" class="screen">
   <canvas id="login-canvas"></canvas>
   <div class="login-wrapper">
-    <div class="login-time" id="login-clock"></div>
+    <div class="login-time" id="login-clock" aria-hidden="true"></div>
     <div class="login-card">
-      <div class="avatar-ring"><div class="avatar-inner">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      </div></div>
-      <div class="login-username">maitrik@portfolio</div>
-      <form id="login-form">
-        <div class="password-wrapper">
-          <input type="password" id="password-input" placeholder="Enter password" autocomplete="off" spellcheck="false">
-          <button type="submit" class="login-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
-        </div>
-      </form>
-      <p class="login-hint">Any key logs you in</p>
-      <div class="login-meta">Last login: <span id="last-login">Never</span></div>
+      <div class="login-card-topbar" aria-hidden="true"></div>
+      <div class="login-card-body">
+        <p class="login-kicker">MaitrikOS</p>
+        <h1 class="login-heading">Sign in</h1>
+        <p class="login-sub">Enter your password to continue to the desktop session.</p>
+        <div class="avatar-ring"><div class="avatar-inner" style="padding:0;overflow:hidden;">
+          <img src="src/png/profile.jpeg" alt="Maitrik Makwana" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">
+        </div></div>
+        <div class="login-username">maitrik@portfolio</div>
+        <form id="login-form">
+          <label class="login-label" for="password-input">Password</label>
+          <div class="password-wrapper">
+            <input type="password" id="password-input" placeholder="Enter password" autocomplete="off" spellcheck="false">
+            <button type="submit" class="login-arrow" aria-label="Sign in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+          </div>
+        </form>
+        <p class="login-hint">Any key logs you in</p>
+        <div class="login-meta">Last login: <span id="last-login">Never</span></div>
+      </div>
     </div>
-    <div class="login-footer"><span>MaitrikOS v1.0 LTS</span><span>|</span><span>Linux 5.15.0-generic</span></div>
+    <div class="login-footer"><span>MaitrikOS v1.0 LTS</span><span class="login-footer-sep" aria-hidden="true">|</span><span>Linux 5.15.0-generic</span></div>
   </div>
 </div>
 
 <!-- DESKTOP -->
 <div id="desktop-screen" class="screen">
   <canvas id="desktop-bg-canvas"></canvas>
+  <div id="desktop-hint" class="desktop-hint hidden" role="status">
+    <div class="desktop-hint-inner">
+      <span class="desktop-hint-title">Quick start</span>
+      <p class="desktop-hint-text">Double-click desktop icons to open apps. Use <strong>MaitrikOS</strong> for the launcher, open <strong>arcade.sh</strong> for mini-games, or press <kbd>Alt</kbd>+<kbd>Tab</kbd> to switch windows.</p>
+      <button type="button" class="desktop-hint-dismiss" id="desktop-hint-dismiss">Got it</button>
+    </div>
+  </div>
 
   <!-- CRT Scanline overlay -->
   <div class="scanline-overlay"></div>
@@ -73,14 +98,14 @@
   <div id="incoming-popup" class="incoming-popup hidden">
     <div class="incoming-header"><span class="incoming-icon">&#128276;</span> Incoming Connection</div>
     <div class="incoming-body">
-      <div class="incoming-row"><span class="incoming-label">User:</span> visitor@unknown</div>
+      <div class="incoming-row"><span class="incoming-label">User:</span> recruiter@portfolio</div>
       <div class="incoming-row"><span class="incoming-label">IP:</span> <span id="visitor-ip">192.168.x.x</span></div>
       <div class="incoming-row"><span class="incoming-label">Access:</span> <span class="t-yellow">guest</span></div>
-      <div class="incoming-row"><span class="incoming-label">Protocol:</span> SSH-2.0</div>
+      <div class="incoming-row"><span class="incoming-label">Host:</span> maitrik-os.portfolio</div>
     </div>
     <div class="incoming-actions">
-      <button class="incoming-btn btn-grant" onclick="IncomingPopup.accept()">Grant Access</button>
-      <button class="incoming-btn btn-deny" onclick="IncomingPopup.accept()">Deny</button>
+      <button type="button" class="incoming-btn btn-grant" onclick="IncomingPopup.accept()">Grant Access</button>
+      <button type="button" class="incoming-btn btn-deny" onclick="IncomingPopup.deny()">Deny</button>
     </div>
   </div>
 
@@ -90,6 +115,7 @@
     <div class="context-item" onclick="OS.contextAction('refresh')"><span>&#128260;</span> Refresh Desktop</div>
     <div class="context-separator"></div>
     <div class="context-item" onclick="OS.contextAction('about')"><span>&#128196;</span> About Me</div>
+    <div class="context-item" onclick="OS.contextAction('arcade')"><span>&#127918;</span> Arcade</div>
     <div class="context-item" onclick="OS.contextAction('resume')"><span>&#128203;</span> Download Resume</div>
     <div class="context-separator"></div>
     <div class="context-item danger" onclick="OS.contextAction('shutdown')"><span>&#9211;</span> Shutdown</div>
@@ -104,8 +130,15 @@
       <div class="launcher-app" onclick="OS.openApp('projects-win')"><div class="l-icon">&#128193;</div><span>Projects</span></div>
       <div class="launcher-app" onclick="OS.openApp('vapt-win')"><div class="l-icon">&#128737;</div><span>VAPT Report</span></div>
       <div class="launcher-app" onclick="OS.openApp('htop-win')"><div class="l-icon">&#128200;</div><span>Skills</span></div>
+      <div class="launcher-app" onclick="OS.openApp('roadmap-win')"><div class="l-icon">&#128205;</div><span>Roadmap</span></div>
+      <div class="launcher-app" onclick="OS.openApp('specs-win')"><div class="l-icon">&#128187;</div><span>Sys Specs</span></div>
+      <div class="launcher-app" onclick="OS.openApp('vault-win')"><div class="l-icon">&#128274;</div><span>Secure Vault</span></div>
+      <div class="launcher-app" onclick="OS.openApp('tools-win')"><div class="l-icon">&#128736;</div><span>Tools</span></div>
+      <div class="launcher-app" onclick="OS.openApp('map-win')"><div class="l-icon">&#127757;</div><span>Threat Map</span></div>
       <div class="launcher-app" onclick="OS.openApp('ctf-win')"><div class="l-icon">&#127942;</div><span>Achievements</span></div>
       <div class="launcher-app" onclick="OS.openApp('contact-win')"><div class="l-icon">&#9993;</div><span>Contact Me</span></div>
+      <div class="launcher-app" onclick="OS.openApp('arcade-win')"><div class="l-icon">&#127918;</div><span>Arcade</span></div>
+      <div class="launcher-app" onclick="OS.openApp('logs-win')"><div class="l-icon">&#128466;</div><span>System Logs</span></div>
     </div>
     <div class="launcher-footer"><button onclick="OS.shutdown()">&#9211; Shutdown</button></div>
   </div>
@@ -121,6 +154,21 @@
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('ctf-win')" tabindex="0"><div class="d-icon-img">&#127942;</div><span>achievements</span></div>
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('htop-win')" tabindex="0"><div class="d-icon-img">&#128200;</div><span>htop</span></div>
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('contact-win')" tabindex="0"><div class="d-icon-img">&#9993;</div><span>contact_me</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('arcade-win')" tabindex="0"><div class="d-icon-img">&#128119;</div><span>arcade.sh</span></div>
+    <div class="d-icon pulse-hover" ondblclick="OS.openApp('roadmap-win')" tabindex="0"><div class="d-icon-img">&#128205;</div><span>roadmap</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('specs-win')" tabindex="0"><div class="d-icon-img">&#128187;</div><span>sys_specs.json</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('vault-win')" tabindex="0"><div class="d-icon-img">&#128274;</div><span>secure_vault</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('tools-win')" tabindex="0"><div class="d-icon-img">&#128736;</div><span>tools_of_trade</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('map-win')" tabindex="0"><div class="d-icon-img">&#127757;</div><span>threat_map</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('logs-win')" tabindex="0"><div class="d-icon-img">&#128466;</div><span>system_logs</span></div>
+  </div>
+
+  <!-- System Status Widget -->
+  <div id="sys-status-widget" class="sys-status-widget">
+    <div class="sw-row"><span class="sw-label">LOCATION:</span> <span class="sw-val">SURAT, IN</span></div>
+    <div class="sw-row"><span class="sw-label">STATUS:</span> <span class="sw-val t-green">OPEN TO WORK</span></div>
+    <div class="sw-row"><span class="sw-label">UPTIME:</span> <span id="sw-uptime" class="sw-val">2y 3m 4d</span></div>
+    <div class="sw-row"><span class="sw-label">BUILD:</span> <span class="sw-val">CHARUSAT 2027</span></div>
   </div>
 
   <div id="wm-layer">
@@ -133,14 +181,9 @@
       </div>
       <div class="win-content terminal-layout">
         <div class="neofetch-display" id="neofetch-display">
-          <pre class="nf-ascii">
-    .--.
-   |o_o |
-   |:_/ |
-  //   \ \
- (|     | )
-/'\_   _/`\
-\___)=(___/</pre>
+          <div class="nf-photo-wrap">
+            <img src="src/png/profile.jpeg" alt="Maitrik Makwana" class="nf-photo">
+          </div>
           <div class="nf-info" id="nf-info"></div>
         </div>
       </div>
@@ -180,7 +223,7 @@
             <div class="fm-file" ondblclick="OS.openProject('pyguard')"><div class="fm-icon">&#128193;</div><div class="fm-name">PyGuard</div><div class="fm-meta">Modern Network Traffic Capture & ML IDS Analysis Tool</div></div>
             <div class="fm-file" ondblclick="OS.openProject('tapms')"><div class="fm-icon">&#128193;</div><div class="fm-name">TAPMS</div><div class="fm-meta">Student batch project collaboration platform</div></div>
             <div class="fm-file" ondblclick="OS.openProject('peerconnect')"><div class="fm-icon">&#128193;</div><div class="fm-name">PeerConnect</div><div class="fm-meta">Community-owned IaaS secure compute sharing platform</div></div>
-            <div class="fm-file" ondblclick="OS.openProject('piisanitization')"><div class="fm-icon">&#128193;</div><div class="fm-name">PII Sanitizer</div><div class="fm-meta">Full-stack ML platform detecting & sanitizing PII</div></div>
+            <div class="fm-file" ondblclick="OS.openProject('piisanitization')"><div class="fm-icon">&#128193;</div><div class="fm-name">PII Sanitizer</div><div class="fm-meta">Comprehensive ML platform detecting & sanitizing PII</div></div>
             <div class="fm-file" ondblclick="OS.openProject('cloudenthu')"><div class="fm-icon">&#128193;</div><div class="fm-name">CloudEnthu</div><div class="fm-meta">Real-world AWS Cloud Practitioner study CMS</div></div>
           </div>
         </div>
@@ -248,19 +291,144 @@
       </div>
       <div class="win-content terminal-layout">
         <div class="htop-container">
-          <div class="htop-header"><span class="t-green">MaitrikOS</span> | Uptime: <span class="t-blue">21 years</span> | Tasks: <span class="t-yellow">8</span> running | Load: <span class="t-green">0.42</span></div>
+          <div class="htop-header"><span class="t-green">MaitrikOS</span> | Uptime: <span class="t-blue">2y 9m</span> | Skills Active: <span class="t-yellow">12</span> | Load: <span class="t-green">0.92</span></div>
           <div class="htop-table">
-            <div class="htop-row htop-head"><span class="htop-pid">PID</span><span class="htop-name">NAME</span><span class="htop-bar-col">CPU%</span><span class="htop-mem">MEM%</span><span class="htop-time">TIME</span><span class="htop-status">STATUS</span></div>
-            <div class="htop-row" data-cpu="87"><span class="htop-pid">001</span><span class="htop-name">vapt-engine</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:87%"></div></div><span class="htop-pct">87%</span></span><span class="htop-mem">45%</span><span class="htop-time">2y 3m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="80"><span class="htop-pid">002</span><span class="htop-name">nmap-scanner</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:80%"></div></div><span class="htop-pct">80%</span></span><span class="htop-mem">25%</span><span class="htop-time">2y 0m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="72"><span class="htop-pid">003</span><span class="htop-name">burpsuite.service</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:72%"></div></div><span class="htop-pct">72%</span></span><span class="htop-mem">38%</span><span class="htop-time">2y 1m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="65"><span class="htop-pid">004</span><span class="htop-name">python-scripting</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:65%"></div></div><span class="htop-pct">65%</span></span><span class="htop-mem">30%</span><span class="htop-time">2y 6m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="58"><span class="htop-pid">005</span><span class="htop-name">aws-cloud.module</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:58%"></div></div><span class="htop-pct">58%</span></span><span class="htop-mem">28%</span><span class="htop-time">1y 2m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="50"><span class="htop-pid">006</span><span class="htop-name">docker-containers</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:50%"></div></div><span class="htop-pct">50%</span></span><span class="htop-mem">35%</span><span class="htop-time">1y 0m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="45"><span class="htop-pid">007</span><span class="htop-name">react-frontend</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:45%"></div></div><span class="htop-pct">45%</span></span><span class="htop-mem">20%</span><span class="htop-time">1y 8m</span><span class="htop-status status-run">Running</span></div>
-            <div class="htop-row" data-cpu="40"><span class="htop-pid">008</span><span class="htop-name">ml-ids-module</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:40%"></div></div><span class="htop-pct">40%</span></span><span class="htop-mem">42%</span><span class="htop-time">0y 8m</span><span class="htop-status status-learn">Learning</span></div>
+            <div class="htop-row htop-head"><span class="htop-pid">PID</span><span class="htop-name">SKILL</span><span class="htop-bar-col">PROFICIENCY</span><span class="htop-mem">EXP</span><span class="htop-time">SINCE</span><span class="htop-status">STATUS</span></div>
+            <div class="htop-row" data-cpu="80"><span class="htop-pid">001</span><span class="htop-name">nmap.service</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:80%"></div></div><span class="htop-pct">80%</span></span><span class="htop-mem">2y</span><span class="htop-time">2023</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="80"><span class="htop-pid">002</span><span class="htop-name">wireshark.service</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:80%"></div></div><span class="htop-pct">80%</span></span><span class="htop-mem">2y</span><span class="htop-time">2023</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="80"><span class="htop-pid">003</span><span class="htop-name">cpp-lang</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:80%"></div></div><span class="htop-pct">80%</span></span><span class="htop-mem">3y</span><span class="htop-time">2022</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="80"><span class="htop-pid">004</span><span class="htop-name">3d-animation</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:80%"></div></div><span class="htop-pct">80%</span></span><span class="htop-mem">3y</span><span class="htop-time">2022</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="80"><span class="htop-pid">005</span><span class="htop-name">video-editing</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:80%"></div></div><span class="htop-pct">80%</span></span><span class="htop-mem">3y</span><span class="htop-time">2022</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="70"><span class="htop-pid">006</span><span class="htop-name">burpsuite.service</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:70%"></div></div><span class="htop-pct">70%</span></span><span class="htop-mem">2y</span><span class="htop-time">2023</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="70"><span class="htop-pid">007</span><span class="htop-name">metasploit.service</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:70%"></div></div><span class="htop-pct">70%</span></span><span class="htop-mem">1y</span><span class="htop-time">2024</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="70"><span class="htop-pid">008</span><span class="htop-name">sql-queries</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:70%"></div></div><span class="htop-pct">70%</span></span><span class="htop-mem">2y</span><span class="htop-time">2023</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="70"><span class="htop-pid">009</span><span class="htop-name">bash-scripting</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:70%"></div></div><span class="htop-pct">70%</span></span><span class="htop-mem">2y</span><span class="htop-time">2023</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="60"><span class="htop-pid">010</span><span class="htop-name">python-scripting</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:60%"></div></div><span class="htop-pct">60%</span></span><span class="htop-mem">2y</span><span class="htop-time">2023</span><span class="htop-status status-run">Active</span></div>
+            <div class="htop-row" data-cpu="60"><span class="htop-pid">011</span><span class="htop-name">aws-cloud.module</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:60%"></div></div><span class="htop-pct">60%</span></span><span class="htop-mem">1y</span><span class="htop-time">2024</span><span class="htop-status status-learn">Learning</span></div>
+            <div class="htop-row" data-cpu="50"><span class="htop-pid">012</span><span class="htop-name">react-node-stack</span><span class="htop-bar-col"><div class="htop-bar"><div class="htop-fill" style="width:50%"></div></div><span class="htop-pct">50%</span></span><span class="htop-mem">1y</span><span class="htop-time">2024</span><span class="htop-status status-learn">Learning</span></div>
           </div>
           <div class="htop-footer">Press <kbd>q</kbd> to quit | <kbd>F5</kbd> tree view | <kbd>F9</kbd> kill process</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ROADMAP / EXPERIENCE TIMELINE -->
+    <div class="win parallax-win" id="roadmap-win" data-title="Digital Roadmap" data-icon="&#128205;" data-depth="0.4">
+      <div class="win-bar" data-win="roadmap-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('roadmap-win')"></span><span class="dot dot-min" onclick="OS.minimize('roadmap-win')"></span><span class="dot dot-max" onclick="OS.maximize('roadmap-win')"></span></div>
+        <div class="win-title">Digital Roadmap -- Experience</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content roadmap-layout">
+        <div class="roadmap-timeline" id="roadmap-timeline">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SYSTEM SPECS (JSON STYLE) -->
+    <div class="win parallax-win" id="specs-win" data-title="System Config" data-icon="&#128187;" data-depth="0.5">
+      <div class="win-bar" data-win="specs-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('specs-win')"></span><span class="dot dot-min" onclick="OS.minimize('specs-win')"></span><span class="dot dot-max" onclick="OS.maximize('specs-win')"></span></div>
+        <div class="win-title">maitrik@portfolio: ~/sys_specs.json</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content terminal-layout">
+        <div class="json-display" id="json-display">
+          <!-- Populated via JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- SECURE VAULT (CERTIFICATIONS) -->
+    <div class="win parallax-win" id="vault-win" data-title="Secure Vault -- Certifications" data-icon="&#128274;" data-depth="0.3">
+      <div class="win-bar" data-win="vault-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('vault-win')"></span><span class="dot dot-min" onclick="OS.minimize('vault-win')"></span><span class="dot dot-max" onclick="OS.maximize('vault-win')"></span></div>
+        <div class="win-title">Secure Vault -- Certificates</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content vault-layout" id="vault-content">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+
+    <!-- TOOLS OF TRADE -->
+    <div class="win parallax-win" id="tools-win" data-title="Tools of Trade -- Arsenal" data-icon="&#128736;" data-depth="0.5">
+      <div class="win-bar" data-win="tools-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('tools-win')"></span><span class="dot dot-min" onclick="OS.minimize('tools-win')"></span><span class="dot dot-max" onclick="OS.maximize('tools-win')"></span></div>
+        <div class="win-title">Technical Arsenal -- Tools</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content tools-layout" id="tools-content">
+        <!-- Populated via JS -->
+      </div>
+    </div>
+
+    <!-- CYBER THREAT MAP -->
+    <div class="win parallax-win" id="map-win" data-title="Global Threat Map" data-icon="&#127757;" data-depth="0.6">
+      <div class="win-bar" data-win="map-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('map-win')"></span><span class="dot dot-min" onclick="OS.minimize('map-win')"></span><span class="dot dot-max" onclick="OS.maximize('map-win')"></span></div>
+        <div class="win-title">Live Cyber Threat Intelligence Feed</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content map-layout">
+        <div class="map-container">
+          <canvas id="threat-map-canvas"></canvas>
+          <div class="map-overlay">
+            <div class="map-stats">
+              <div class="stat-item"><span class="stat-label">ATTACKS:</span> <span class="stat-val t-red" id="map-attack-count">0</span></div>
+              <div class="stat-item"><span class="stat-label">STATUS:</span> <span class="stat-val t-green">MONITORING</span></div>
+            </div>
+            <div id="map-log" class="map-log"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SYSTEM LOGS (GUESTBOOK) -->
+    <div class="win parallax-win" id="logs-win" data-title="/var/log/visitors.log" data-icon="&#128466;" data-depth="0.4">
+      <div class="win-bar" data-win="logs-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('logs-win')"></span><span class="dot dot-min" onclick="OS.minimize('logs-win')"></span><span class="dot dot-max" onclick="OS.maximize('logs-win')"></span></div>
+        <div class="win-title">/var/log/visitors.log</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content terminal-layout logs-layout">
+        <div class="logs-header">
+          [  OK  ] System log monitor initialized.<br>
+          [ INFO ] Viewing public access logs.
+        </div>
+        <div id="visitors-log-entries" class="logs-entries"></div>
+        <div class="logs-footer">
+          <form id="log-inject-form" class="log-inject-form">
+            <span class="t-green">visitor@maitrik-os</span><span class="t-muted">:</span><span class="t-blue">/var/log</span><span class="t-white">$ </span>
+            <input type="text" id="log-input" placeholder="./inject_log.sh --msg 'Your message here'" autocomplete="off">
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- ARCADE -->
+    <div class="win parallax-win" id="arcade-win" data-title="Arcade" data-icon="&#127918;" data-depth="0.35">
+      <div class="win-bar" data-win="arcade-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('arcade-win')"></span><span class="dot dot-min" onclick="OS.minimize('arcade-win')"></span><span class="dot dot-max" onclick="OS.maximize('arcade-win')"></span></div>
+        <div class="win-title">~/games/arcade</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content arcade-layout">
+        <div class="arcade-tabs">
+          <button type="button" class="arcade-tab arcade-tab-active" data-arcade-tab="highway">Neon Highway</button>
+          <button type="button" class="arcade-tab" data-arcade-tab="hexrush">Hex Rush</button>
+        </div>
+        <div class="arcade-panel" data-arcade-panel="highway">
+          <div class="highway-hud"><span>Score</span> <strong id="highway-score">0</strong> · Best <span id="highway-best">0</span></div>
+          <canvas id="highway-canvas" width="300" height="420" tabindex="0" aria-label="Neon Highway lane game"></canvas>
+          <div class="highway-touch">
+            <button type="button" id="highway-left" class="arcade-lr" aria-label="Lane left">&#9664;</button>
+            <button type="button" class="arcade-primary" id="highway-start">Start / Restart</button>
+            <button type="button" id="highway-right" class="arcade-lr" aria-label="Lane right">&#9654;</button>
+          </div>
+          <p class="arcade-hint">Three lanes — dodge the red blocks. <kbd>A</kbd>/<kbd>D</kbd> or arrows. Buttons work too.</p>
+        </div>
+        <div class="arcade-panel" data-arcade-panel="hexrush" style="display:none">
+          <div class="hexrush-hud">Score <strong id="hexrush-score">0</strong> · Streak <span id="hexrush-streak">0</span></div>
+          <div class="hexrush-timer-wrap"><div id="hexrush-bar" class="hexrush-bar"></div></div>
+          <div id="hexrush-display" class="hexrush-display"></div>
+          <input type="text" id="hexrush-input" class="hexrush-input" autocomplete="off" spellcheck="false" placeholder="Type the payload exactly..." />
+          <button type="button" class="arcade-primary" id="hexrush-start">Start job</button>
+          <p class="arcade-hint">Cyber-themed strings — beat the clock. Each success shortens your time limit slightly.</p>
         </div>
       </div>
     </div>
@@ -375,5 +543,6 @@
 
 <script src="main.js"></script>
 <script src="effects.js"></script>
+<script src="games.js"></script>
 </body>
 </html>

@@ -2,12 +2,12 @@
 
 ## About Me
 
-I am **Maitrik Makwana**, a passionate cybersecurity enthusiast and Full Stack Developer. I am currently pursuing my B.Tech in Computer Engineering at CHARUSAT University (CGPA: 9.2). My core expertise lies in Vulnerability Assessment and Penetration Testing (VAPT), Cloud infrastructure, and modern web development.
+I am **Maitrik Makwana**, a passionate cybersecurity enthusiast and Cloud Professional. I am currently pursuing my B.Tech in Computer Engineering at CHARUSAT University (CGPA: 9.2). My core expertise lies in Vulnerability Assessment and Penetration Testing (VAPT), Cloud infrastructure, and modern web development.
 
 I specialize in:
 - Penetration testing & Vulnerability Assessment
 - Network Security & Cryptography
-- Secure Full Stack Web Development
+- Secure Web Development
 - Cloud Architecture & Automation
 
 I recently completed a Cybersecurity Internship at CyBrief Pvt Ltd, where I conducted full-lifecycle VAPT on vulnerable machines and identified critical security flaws. 
@@ -27,7 +27,7 @@ Currently, I am actively seeking roles and collaborations focused on practical c
 - **PyGuard**: Modern Network Traffic Metadata Capture & Analysis with ML IDS
 - **TAPMS**: Teams & Project Management platform built with React, Node, PostgreSQL, and Docker
 - **PeerConnect**: Community-owned Infrastructure-as-a-Service (IaaS) for secure Docker container sharing
-- **PII Data Sanitization Platform**: Full-stack platform for detecting and sanitizing PII powered by Python ML & React
+- **PII Data Sanitization Platform**: Comprehensive platform for detecting and sanitizing PII powered by Python ML & React
 - **CloudEnthu**: Real-world AWS Cloud Practitioner notes and study CMS
 
 ## Technologies Used
@@ -36,7 +36,7 @@ Currently, I am actively seeking roles and collaborations focused on practical c
 - HTML5, CSS3, Vanilla JavaScript
 - Canvas API for animations (Boot sequence, CRT effects)
 
-### Full Stack & Cloud (Via Projects)
+### Cloud & Web Development (Via Projects)
 - React.js, Node.js, Express, Python (FastAPI/Django)
 - PostgreSQL, Prisma ORM, Redis, BullMQ
 - AWS (EC2, S3, IAM, Lambda), Docker, Linux, Git

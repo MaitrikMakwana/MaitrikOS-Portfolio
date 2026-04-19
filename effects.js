@@ -22,8 +22,8 @@ var Terminal={
     if(cmd==='cd'){this.print('(simulated) Changed directory to '+args.join(' '));return;}
     var h=this.commands[cmd];if(h)h.call(this,args);else this.print('bash: '+cmd+': command not found. Type \'help\'.');},
   commands:{
-    help:function(){var l=['<span class="t-green">MaitrikOS -- Available Commands</span>','--------------------------------------','<span class="t-blue">whoami</span>       - display identity','<span class="t-blue">ls [dir]</span>     - list directory','<span class="t-blue">cat [file]</span>   - display file','<span class="t-blue">pwd</span>          - working directory','<span class="t-blue">ping [host]</span>  - ping server','<span class="t-blue">nmap</span>         - port scan','<span class="t-blue">neofetch</span>     - system info','<span class="t-blue">htop</span>         - process monitor','<span class="t-blue">ssh cybrief</span>  - connect to CyBrief','<span class="t-blue">skills</span>       - list skills','<span class="t-blue">history</span>      - command history','<span class="t-blue">open [app]</span>   - open app','<span class="t-blue">resume</span>       - view resume','<span class="t-blue">cowsay [msg]</span> - ascii cow','<span class="t-blue">sl</span>           - steam locomotive','<span class="t-blue">clear</span>        - clear terminal','<span class="t-blue">sudo hire maitrik</span> - easter egg'];for(var i=0;i<l.length;i++)this.print(l[i],'markup');},
-    whoami:function(){this.print('maitrik -- cybersecurity enthusiast, CE student @ CHARUSAT, 9.2 CGPA');},
+    help:function(){var l=['<span class="t-green">MaitrikOS -- Available Commands</span>','--------------------------------------','<span class="t-blue">whoami</span>       - display identity','<span class="t-blue">roadmap</span>      - view experience timeline','<span class="t-blue">specs</span>        - system technical specs (JSON)','<span class="t-blue">socials</span>      - view social media links','<span class="t-blue">ls [dir]</span>     - list directory','<span class="t-blue">cat [file]</span>   - display file','<span class="t-blue">pwd</span>          - working directory','<span class="t-blue">ping [host]</span>  - ping server','<span class="t-blue">nmap</span>         - port scan','<span class="t-blue">neofetch</span>     - system info','<span class="t-blue">htop</span>         - process monitor','<span class="t-blue">ssh cybrief</span>  - connect to CyBrief','<span class="t-blue">skills</span>       - list skills','<span class="t-blue">history</span>      - command history','<span class="t-blue">open [app]</span>   - open app (incl. arcade, games)','<span class="t-blue">games</span>        - list mini-games','<span class="t-blue">play [game]</span>  - highway | hexrush','<span class="t-blue">resume</span>       - view resume','<span class="t-blue">hack [tgt]</span>   - simulate breach','<span class="t-blue">scan_network</span> - simulate port scan','<span class="t-blue">root</span>         - escalate privileges','<span class="t-blue">clear</span>        - clear terminal','<span class="t-blue">sudo hire maitrik</span> - easter egg'];for(var i=0;i<l.length;i++)this.print(l[i],'markup');},
+    whoami:function(){this.print('maitrik makwana -- B.Tech CE @ CHARUSAT (9.2 CGPA) | Cybersecurity Intern @ CyBrief | Video Editor & 3D Animator | Surat, Gujarat');},
     ls:function(args){
       var isAll = (args && args.indexOf('-a') > -1);
       var allSkills = ['VAPT','Nmap','Burp_Suite','Metasploit','Wireshark','SQLMap','Scapy','Python','C++','C','SQL','Bash','JavaScript','TypeScript','React.js','Tailwind','Node.js','Express.js','PostgreSQL','Prisma','FastAPI','AWS','Docker','Linux','Git','Cloudflare_R2','spaCy','Presidio_NLP','Tesseract_OCR','YOLOv8'];
@@ -38,27 +38,47 @@ var Terminal={
       }else this.print('ls: cannot access \''+target+'\'');
     },
     cat:function(args){
-      var files={'about_me.txt':['Name     : Maitrik Makwana','Role     : Cybersecurity Enthusiast & Full Stack Developer','Education: B.Tech CE @ CHARUSAT (9.2)','Focus    : VAPT, Cloud, Network Security, AI/ML'],'resume':['=== MAITRIK MAKWANA ===','CyberSec Intern @ CyBrief Pvt Ltd','B.Tech CE, CHARUSAT (CGPA: 9.2)','','Skills: Nmap, Burp Suite, Metasploit','Projects: PyGuard, TAPMS, PII Sanitizer, PeerConnect, CloudEnthu','Contact: maitrikmakwana18@gmail.com'],'skills.json':['{', '  "cybersec": ["VAPT", "Nmap", "Burp Suite", "Metasploit", "Wireshark", "SQLMap", "Scapy"],', '  "languages": ["Python", "C++", "C", "SQL", "Bash", "JavaScript", "TypeScript"],', '  "frontend": ["React.js", "Tailwind CSS", "HTML5", "CSS3"],', '  "backend": ["Node.js", "Express.js", "PostgreSQL", "Prisma ORM", "BullMQ", "FastAPI"],', '  "cloud_devops": ["AWS", "Docker", "Linux", "Git", "Cloudflare R2"],', '  "ai_ml": ["Presidio NLP", "spaCy", "Tesseract OCR", "YOLOv8"]', '}'],'.bashrc':['# MaitrikOS .bashrc','export PS1="\\u@\\h:\\w$ "','alias hack="echo Nice try"'], '.secret_flag':['Wow, you actually checked hidden files!','Here is your flag: HTB{gh0st_1n_th3_sh3ll}','Type "submit_flag HTB{gh0st_1n_th3_sh3ll}" to claim it.']};
+      var files={
+        'about_me.txt':['Name     : Maitrik Makwana','Location : Surat, Gujarat, India','Role     : CE Student | Cybersecurity Enthusiast | Creative Professional','Tagline  : Building real-world tech with a drive for cybersecurity & cloud','','Education: B.Tech Computer Engineering @ CHARUSAT (2023-2027)','CGPA     : 9.2 / 10.0 (5th Semester)','','Experience:','  - Cybersecurity Intern @ CyBrief Pvt. Ltd. (May-Jun 2025)','  - Video Editor & 3D Animator @ GDG CHARUSAT [Ongoing]','  - University Media Crew @ CHARUSAT (2024-2025)','  - Freelance Video Editing & 3D Animation','','Hobbies  : Photography, Filmmaking, 3D Animation'],
+        'resume':['Opening resume viewer...','(Triggering PDF viewer)'],
+        'skills.json':['{','  "cybersecurity": {','    "Nmap": "80%", "Burp Suite": "70%", "Metasploit": "70%",','    "Wireshark": "80%", "SQLMap": "70%", "OWASP VAPT": "75%"','  },','  "languages": {','    "C++": "80%", "Python": "60%", "SQL": "70%",','    "Bash": "70%", "JavaScript": "50%"','  },','  "stack": {','    "React": "50%", "Node.js": "50%", "Express": "55%",','    "PostgreSQL": "65%", "Docker": "60%", "AWS": "60%"','  },','  "creative": {','    "3D Animation": "80%", "Video Editing": "80%", "Photography": "Hobby"','  }','}'],
+        'projects':['1. PyGuard      -- Network Traffic Capture & ML IDS Analysis (Python, PyQt5, Scapy)','2. CloudEnthu   -- AWS Learning Blog CMS (React, Node.js, PostgreSQL)','3. PII Sanitizer -- AI-powered PII Detection Platform (React, Express, Presidio NLP)','4. PeerCloud    -- Community IaaS Platform [In Progress] (Docker, Node.js)','','Most Proud: PyGuard -- used by CHARUSAT lab faculty for teaching network security!'],
+        '.bashrc':['# MaitrikOS .bashrc','export PS1="\\u@\\h:\\w$ "','alias hack="echo Nice try, run: hack [target]"','alias pyguard="python run_pyguard.py"'],
+        '.secret_flag':['Wow, you actually checked hidden files!','Flag: HTB{gh0st_1n_th3_sh3ll_maitrik}','Submit with: submit_flag HTB{gh0st_1n_th3_sh3ll_maitrik}']
+      };
       if(!args||!args[0]){this.print('cat: missing operand');return;}
-      var c=files[args[0]];if(c)for(var i=0;i<c.length;i++)this.print(c[i]);else this.print('cat: '+args[0]+': No such file');
+      if(args[0]==='resume'){this.print('Opening Document Viewer...');OS.openApp('pdf-win');return;}
+      var c=files[args[0]];if(c)for(var i=0;i<c.length;i++)this.print(c[i]);else this.print('cat: '+args[0]+': No such file or directory');
     },
     pwd:function(){this.print('/home/maitrik');},
     ping:function(args){var host=(args&&args[0])||'maitrik.dev';this.print('PING '+host+' (192.168.1.142): 56 data bytes');var self=this;for(var i=1;i<=3;i++){(function(seq){setTimeout(function(){self.print('64 bytes from '+host+': icmp_seq='+seq+' ttl=64 time='+(Math.random()*3+0.1).toFixed(3)+' ms');if(seq===3)self.print('--- 3 packets, 3 received, 0% loss \ud83d\udfe2');self.scrollBottom();},seq*600);})(i);}},
     nmap:function(){this.print('Starting Nmap 7.92 ( https://nmap.org )');this.print('Nmap scan report for localhost (127.0.0.1)\n');this.print('<span class="t-muted">PORT       STATE  SERVICE        VERSION</span>','markup');var ports=[['22/tcp','open','ssh','[Python]'],['80/tcp','open','http','[ReactJS]'],['443/tcp','open','https','[AWS]'],['4444/tcp','open','metasploit','[Exploitation]'],['5432/tcp','open','postgresql','[Database]'],['8080/tcp','open','proxy','[Burp Suite]']];for(var i=0;i<ports.length;i++){var p=ports[i];while(p[0].length<10)p[0]+=' ';while(p[1].length<7)p[1]+=' ';while(p[2].length<15)p[2]+=' ';this.print('<span class="t-green">'+p[0]+'</span><span class="t-yellow">'+p[1]+'</span>'+p[2]+'<span class="t-muted">'+p[3]+'</span>','markup');}},
     neofetch:function(){var l=['<span class="t-green">    .--.</span>        <span class="t-green">maitrik</span>@<span class="t-blue">maitrik-os</span>','<span class="t-green">   |o_o |</span>       ---------------------','<span class="t-green">   |:_/ |</span>       <span class="t-blue">OS:</span> MaitrikOS (Human v21)','<span class="t-green">  //   \\\\ \\\\</span>      <span class="t-blue">Host:</span> CHARUSAT University','<span class="t-green"> (|     | )</span>     <span class="t-blue">CGPA:</span> 9.2/10.0','<span class="t-green">/\'\\\\_ _/`\\\\</span>     <span class="t-blue">Role:</span> CyberSec @ CyBrief','<span class="t-green">\\\\___)=(___/</span>    <span class="t-blue">Skills:</span> Nmap \u00b7 Burp \u00b7 MSF \u00b7 Docker'];for(var i=0;i<l.length;i++)this.print(l[i],'markup');},
     htop:function(){this.print('<span class="t-green">MaitrikOS</span> | Tasks: <span class="t-yellow">8</span> running','markup');this.print('<span class="t-muted">PID  NAME                 CPU%  STATUS</span>','markup');var p=[['001','vapt-engine','87%','Running'],['002','nmap-scanner','80%','Running'],['003','burpsuite','72%','Running'],['004','python','65%','Running'],['005','aws-cloud','58%','Running'],['008','ml-ids','40%','Learning']];for(var i=0;i<p.length;i++){var x=p[i];while(x[0].length<5)x[0]+=' ';while(x[1].length<21)x[1]+=' ';while(x[2].length<6)x[2]+=' ';var col=x[3]==='Learning'?'t-yellow':'t-green';this.print(x[0]+x[1]+'<span class="t-green">'+x[2]+'</span><span class="'+col+'">'+x[3]+'</span>','markup');}},
-    ssh:function(args){var d=(args&&args[0])||'';if(d==='cybrief'){this.print('Connecting to CyBrief Pvt Ltd...');var self=this;setTimeout(function(){self.print('<span class="t-green">Connected</span> -- CyBrief Pvt Ltd, Ahmedabad','markup');self.print('Duration: May-July 2025');self.print('[+] Full-lifecycle VAPT on Metasploitable2');self.print('[+] 7 severe vulnerabilities identified (Max CVSS 10.0)');self.print('[+] Tools: Nmap, Metasploit, Burp Suite, Hydra, Wireshark');self.print('Connection closed.');self.scrollBottom();},800);}else this.print('ssh: Could not resolve '+d);},
-    history:function(){var f=['[1001] nmap -sV 192.168.1.0/24','[1002] msfconsole','[1003] use exploit/unix/ftp/vsftpd_234_backdoor','[1004] set RHOSTS 192.168.1.105','[1005] exploit','[1006] python3 pyguard.py --capture eth0','[1007] echo "HTB{gh0st_1n_th3_sh3ll} is hidden. Do not forget it."','[1008] echo "I should probably sleep"'];for(var i=0;i<f.length;i++)this.print(f[i]);},
+    ssh:function(args){var d=(args&&args[0])||'';if(d==='cybrief'){this.print('Connecting to CyBrief Pvt Ltd... (Ahmedabad, GJ)');var self=this;setTimeout(function(){self.print('<span class="t-green">Connected</span> -- CyBrief Pvt. Ltd. | Intern ID: CBPL-I0100','markup');self.print('Duration : 12 May 2025 – 28 June 2025 (6 weeks)');self.print('Role     : Cybersecurity Intern');self.print('[+] VAPT on DVWA and Metasploitable2 (OWASP methodology)');self.print('[+] Wrote professional security assessment reports');self.print('[+] Tools used: Nmap, Burp Suite, Metasploit, TryHackMe');self.print('Connection closed by remote host.');self.scrollBottom();},800);}else this.print('ssh: Could not resolve hostname '+d+': Name or service not known');},
+    history:function(){var f=['[1001] ssh maitrik@cybrief.pvt','[1002] nmap -sV -sC 192.168.1.0/24','[1003] msfconsole -q','[1004] use exploit/unix/ftp/vsftpd_234_backdoor','[1005] set RHOSTS 192.168.56.101 && exploit','[1006] python run_pyguard.py --capture eth0 --db postgres','[1007] cat vapt_report_dvwa.pdf | grep CRITICAL','[1008] git push origin main  # PyGuard v1.2','[1009] blender --background render_intro.blend','[1010] echo "sleep is a vulnerability" >> /var/log/thoughts'];for(var i=0;i<f.length;i++)this.print(f[i]);},
     skills:function(){
       this.print('<span class="t-green">cat /etc/skills.conf</span>','markup');
-      this.print('[CyberSec] VAPT, Nmap, Burp Suite, Metasploit, Wireshark, SQLMap, Scapy');
-      this.print('[Languages] Python, C++, C, SQL, Bash, JavaScript, TypeScript');
-      this.print('[Web Stack] React.js, Tailwind, Node.js, Express, PostgreSQL, Prisma, FastAPI');
-      this.print('[Cloud/Ops] AWS (IAM, S3, EC2), Docker, Linux, Git, Cloudflare R2');
-      this.print('[AI/ML   ] spaCy, Presidio NLP, Tesseract OCR, YOLOv8');
+      this.print('[CyberSec  ] Nmap (80%) | Burp Suite (70%) | Metasploit (70%) | Wireshark (80%) | SQLMap (70%)');
+      this.print('[Languages ] C++ (80%) | Python (60%) | SQL (70%) | Bash (70%) | JavaScript (50%)');
+      this.print('[Stack     ] React (50%) | Node.js (50%) | PostgreSQL (65%) | Docker (60%) | AWS (60%)');
+      this.print('[Creative  ] 3D Animation (80%) | Video Editing (80%) | Photography (Hobby)');
+      this.print('[Certs     ] Google Cybersecurity [In Progress] | AWS CLF-C02 [Appearing]');
     },
     resume:function(){this.print('Opening Document Viewer...');OS.openApp('pdf-win');},
-    open:function(args){var map={'terminal':'terminal-win','about':'neofetch-win','neofetch':'neofetch-win','projects':'projects-win','contact':'contact-win','vapt':'vapt-win','htop':'htop-win','achievements':'ctf-win','resume':'pdf-win'};if(!args||!args[0]){this.print('open: try: '+Object.keys(map).join(', '));return;}var id=map[args[0]];if(id){OS.openApp(id);this.print('Opening '+args[0]+'...');}else this.print('open: \''+args[0]+'\' not found');},
+    roadmap:function(){this.print('Accessing digital roadmap...');OS.openApp('roadmap-win');},
+    specs:function(){this.print('Fetching system specifications...');OS.openApp('specs-win');},
+    socials:function(){
+      this.print('<span class="t-green">Maitrik Makwana -- Online Presence</span>','markup');
+      this.print('<span class="t-blue">GitHub:</span>    https://github.com/MaitrikMakwana');
+      this.print('<span class="t-blue">LinkedIn:</span>  https://www.linkedin.com/in/maitrik-makwana-5a9575283/');
+      this.print('<span class="t-blue">Instagram:</span> https://www.instagram.com/maitrik__makwana/');
+      this.print('<span class="t-blue">Email:</span>     maitrikmakwana18@gmail.com');
+      this.print('\nType <span class="t-blue">open [platform]</span> to launch (github / linkedin / instagram)','markup');
+    },
+    open:function(args){var map={'terminal':'terminal-win','about':'neofetch-win','neofetch':'neofetch-win','projects':'projects-win','contact':'contact-win','vapt':'vapt-win','htop':'htop-win','achievements':'ctf-win','resume':'pdf-win','arcade':'arcade-win','games':'arcade-win','roadmap':'roadmap-win','specs':'specs-win','vault':'vault-win','tools':'tools-win','map':'map-win','logs':'logs-win','github':'https://github.com/MaitrikMakwana','linkedin':'https://www.linkedin.com/in/maitrik-makwana-5a9575283/','instagram':'https://www.instagram.com/maitrik__makwana/'};if(!args||!args[0]){this.print('open: try: '+Object.keys(map).join(', '));return;}var id=map[args[0]];if(id){if(id.startsWith('http')){window.open(id,'_blank');this.print('Redirecting to '+args[0]+'...');}else{OS.openApp(id);this.print('Opening '+args[0]+'...');}}else this.print('open: \''+args[0]+'\' not found');},
+    games:function(){this.print('<span class="t-green">~/games</span> — built into MaitrikOS','markup');this.print('  play highway — Neon Highway (3-lane dodge, A/D or arrows)');this.print('  play hexrush — type payloads before the timer runs out');this.print('Or: <span class="t-blue">open arcade</span> for the full window.','markup');},
+    play:function(args){var g=args&&args[0]?args[0].toLowerCase():'';if(g!=='highway'&&g!=='hexrush'){this.print('Usage: play highway | hexrush');return;}if(typeof MiniGames==='undefined'){this.print('games module not loaded.');return;}OS.openApp('arcade-win');var self=this;setTimeout(function(){MiniGames.switchTo(g);if(g==='highway')MiniGames.highway.focusCanvas();else{var i=document.getElementById('hexrush-input');if(i)i.focus();}self.print('Launched: '+g);},280);},
     clear:function(){if(this.output)this.output.innerHTML='';},
     submit_flag:function(args){
       if(!args||args.length===0){ this.print('Usage: submit_flag {flag}'); return; }
@@ -75,6 +95,42 @@ var Terminal={
       var l=msg.length+2;var b=' ';for(var i=0;i<l;i++)b+='-';
       this.print(b);this.print('&lt; '+this.escape(msg)+' &gt;','markup');this.print(b);
       this.print('        \\   ^__^');this.print('         \\  (oo)\\_______');this.print('            (__)\\       )\\/\\');this.print('                ||----w |');this.print('                ||     ||');
+    },
+    hack:function(args){
+      var tgt=(args&&args[0])||'127.0.0.1';
+      this.print('Initializing exploit payload for '+tgt+'...');
+      var self=this;
+      var lines=['[!] Exploit sequence started','[+] Bypassing firewall...','[+] Exploiting vsftpd 2.3.4 backdoor','[+] Injecting shellcode...','[+] Escalating privileges...','[!] ROOT ACCESS GRANTED','[+] Wiping logs...'];
+      for(var i=0; i<lines.length; i++){
+        (function(ln, idx){
+          setTimeout(function(){
+            self.print('<span class="'+(idx===5?'t-red':'t-green')+'">'+ln+'</span>','markup');
+            if(idx===6) self.print('\nBreach successful. Control established.');
+          }, (idx+1)*500);
+        })(lines[i], i);
+      }
+    },
+    scan_network:function(){
+      this.print('Scanning local network for vulnerable nodes...');
+      var self=this;
+      var count=0;
+      var iv = setInterval(function(){
+        count += 10;
+        self.print(`Progress: [${'='.repeat(count/5)}${' '.repeat(20-count/5)}] ${count}%`);
+        if(count >= 100){
+          clearInterval(iv);
+          self.print('\nScan complete. 3 vulnerable hosts identified.');
+          self.print('Type <span class="t-blue">nmap</span> for details.','markup');
+        }
+      }, 300);
+    },
+    root:function(){
+      this.print('Escalating privileges to ROOT...');
+      var self=this;
+      setTimeout(function(){
+        toggleRootMode();
+        self.print('<span class="t-red">SYSTEM OVERRIDE: Breach Mode Active.</span>','markup');
+      }, 1000);
     },
     sl:function(){
       this.print('      ====        ________                ___________');
@@ -190,21 +246,27 @@ var IncomingPopup={
     popup.classList.add('accepted');
     Notif.show('Firewall','Connection accepted. Welcome, visitor.','&#128274;');
     setTimeout(function(){popup.classList.add('hidden');},400);
+  },
+  deny:function(){
+    var popup=$('incoming-popup');if(!popup)return;
+    popup.classList.add('accepted');
+    Notif.show('Firewall','Inbound connection dropped by policy.','&#128683;');
+    setTimeout(function(){popup.classList.add('hidden');},400);
   }
 };
 
 // ---- ACTIVITY FEED ----
 var ActivityFeed={
   items:[
-    {dot:'#00ff41',text:'vapt-engine running...            2s ago'},
-    {dot:'#58a6ff',text:'new commit pushed -- PyGuard       5s ago'},
-    {dot:'#ffcc00',text:'AWS Lambda function deployed      12s ago'},
-    {dot:'#ff5f57',text:'Threat detected -- port scan blocked  30s ago'},
-    {dot:'#00ff41',text:'CyBrief: report delivered         1min ago'},
-    {dot:'#58a6ff',text:'docker-containers: healthy         3s ago'},
-    {dot:'#bc8cff',text:'ml-ids: training epoch 42/100     8s ago'},
-    {dot:'#ffcc00',text:'react-frontend: build passed      15s ago'},
-    {dot:'#00ff41',text:'nmap-scanner: 0 threats found     20s ago'}
+    {dot:'#00ff41',text:'PyGuard: running in CHARUSAT network lab  live'},
+    {dot:'#58a6ff',text:'PeerCloud: Docker IaaS pipeline active    build'},
+    {dot:'#ffcc00',text:'Google Cybersecurity Cert: module 4/8     ongoing'},
+    {dot:'#ff5f57',text:'Threat Map: inbound scan blocked          active'},
+    {dot:'#00ff41',text:'CyBrief VAPT: 2 reports delivered         done'},
+    {dot:'#58a6ff',text:'GDG CHARUSAT: promo video exported        2d ago'},
+    {dot:'#bc8cff',text:'AWS CLF-C02: exam prep in progress        study'},
+    {dot:'#ffcc00',text:'PII Sanitizer: v1.2 pipeline test passed  3d ago'},
+    {dot:'#00ff41',text:'CloudEnthu: live at cloud-enthu.vercel.app shipped'}
   ],
   idx:0,iv:null,
   start:function(){
@@ -227,6 +289,7 @@ var ActivityFeed={
 var CursorTrail={
   container:null,throttle:0,
   init:function(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     this.container=$('cursor-trail');if(!this.container)return;
     var self=this;
     document.addEventListener('mousemove',function(e){
@@ -242,6 +305,7 @@ var CursorTrail={
 // ---- PARALLAX ----
 var Parallax={
   init:function(){
+    if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     var cx=innerWidth/2,cy=innerHeight/2;
     document.addEventListener('mousemove',function(e){
       var dx=(e.clientX-cx)/cx,dy=(e.clientY-cy)/cy;
