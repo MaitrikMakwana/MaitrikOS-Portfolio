@@ -22,7 +22,7 @@ var Terminal={
     if(cmd==='cd'){this.print('(simulated) Changed directory to '+args.join(' '));return;}
     var h=this.commands[cmd];if(h)h.call(this,args);else this.print('bash: '+cmd+': command not found. Type \'help\'.');},
   commands:{
-    help:function(){var l=['<span class="t-green">MaitrikOS -- Available Commands</span>','--------------------------------------','<span class="t-blue">whoami</span>       - display identity','<span class="t-blue">roadmap</span>      - view experience timeline','<span class="t-blue">specs</span>        - system technical specs (JSON)','<span class="t-blue">socials</span>      - view social media links','<span class="t-blue">ls [dir]</span>     - list directory','<span class="t-blue">cat [file]</span>   - display file','<span class="t-blue">pwd</span>          - working directory','<span class="t-blue">ping [host]</span>  - ping server','<span class="t-blue">nmap</span>         - port scan','<span class="t-blue">neofetch</span>     - system info','<span class="t-blue">htop</span>         - process monitor','<span class="t-blue">ssh cybrief</span>  - connect to CyBrief','<span class="t-blue">skills</span>       - list skills','<span class="t-blue">history</span>      - command history','<span class="t-blue">open [app]</span>   - open app (incl. arcade, games)','<span class="t-blue">games</span>        - list mini-games','<span class="t-blue">play [game]</span>  - highway | hexrush','<span class="t-blue">resume</span>       - view resume','<span class="t-blue">hack [tgt]</span>   - simulate breach','<span class="t-blue">scan_network</span> - simulate port scan','<span class="t-blue">root</span>         - escalate privileges','<span class="t-blue">clear</span>        - clear terminal','<span class="t-blue">sudo hire maitrik</span> - easter egg'];for(var i=0;i<l.length;i++)this.print(l[i],'markup');},
+    help:function(){var l=['<span class="t-green">MaitrikOS -- Available Commands</span>','--------------------------------------','<span class="t-blue">whoami</span>       - display identity','<span class="t-blue">roadmap</span>      - view experience timeline','<span class="t-blue">specs</span>        - system technical specs (JSON)','<span class="t-blue">socials</span>      - view social media links','<span class="t-blue">ls [dir]</span>     - list directory','<span class="t-blue">cat [file]</span>   - display file','<span class="t-blue">pwd</span>          - working directory','<span class="t-blue">ping [host]</span>  - ping server','<span class="t-blue">nmap</span>         - port scan','<span class="t-blue">neofetch</span>     - system info','<span class="t-blue">htop</span>         - process monitor','<span class="t-blue">ssh cybrief</span>  - connect to CyBrief','<span class="t-blue">skills</span>       - list skills','<span class="t-blue">history</span>      - command history','<span class="t-blue">open [app]</span>   - open app (incl. arcade, games)','<span class="t-blue">games</span>        - list mini-games','<span class="t-blue">play [game]</span>  - highway | hexrush','<span class="t-blue">resume</span>       - view resume','<span class="t-blue">hack [tgt]</span>   - simulate breach','<span class="t-blue">scan_network</span> - simulate port scan','<span class="t-blue">root</span>         - escalate privileges','<span class="t-blue">clear</span>        - clear terminal','<span class="t-blue">ctf</span>          - launch CTF challenges','<span class="t-blue">mission [name]</span> - view missions','<span class="t-blue">hint [mission]</span> - get mission hints','<span class="t-blue">solve [mission]</span> - get mission solutions','<span class="t-blue">submit_flag</span>  - submit CTF flag','<span class="t-blue">sudo hire maitrik</span> - easter egg'];for(var i=0;i<l.length;i++)this.print(l[i],'markup');},
     whoami:function(){this.print('maitrik makwana -- B.Tech CE @ CHARUSAT (9.2 CGPA) | Cybersecurity Intern @ CyBrief | Video Editor & 3D Animator | Surat, Gujarat');},
     ls:function(args){
       var isAll = (args && args.indexOf('-a') > -1);
@@ -86,6 +86,7 @@ var Terminal={
         this.print('<span class="t-green" style="font-size:18px; font-weight:bold;">\u2691 ACHIEVEMENT UNLOCKED: "Ghost in the Shell"</span>','markup');
         this.print('Congratulations! You found the hidden flag. Welcome to the elite tier.');
         Notif.show('CTF Subsystem','Flag accepted! You found it!','&#127942;');
+        Achievement.unlock('ghost_in_shell');
       } else {
         this.print('<span class="t-red">Invalid flag. Keep hunting.</span>','markup');
       }
@@ -141,7 +142,73 @@ var Terminal={
       this.print('  | ________|___H__/__|_____/[][]~\\_______|       |');
       this.print('  |/ |   |-----------I_____I [][] []  D   |=======|__');
     },
-    sudo:function(args){var j=args?args.join(' '):'';if(j==='hire me'||j==='hire maitrik'){this.print('[sudo] password for maitrik: ');var self=this;setTimeout(function(){self.print('<span class="t-green">Access granted.</span>','markup');self.print('Redirecting to maitrikmakwana18@gmail.com...');Notif.show('System','sudo hire maitrik executed!','&#128640;');setTimeout(function(){window.open('mailto:maitrikmakwana18@gmail.com');},500);},800);}else if(j==='rm -rf /'||j==='rm -rf / --no-preserve-root'){fakeDelete(this);}else this.print('[sudo] incident will be reported.');}
+    ctf:function(){
+      this.print('Launching CTF Challenge Arena...');
+      OS.openApp('ctf-challenge-win');
+    },
+    sudo:function(args){var j=args?args.join(' '):'';if(j==='hire me'||j==='hire maitrik'){this.print('[sudo] password for maitrik: ');var self=this;setTimeout(function(){self.print('<span class="t-green">Access granted.</span>','markup');self.print('Redirecting to maitrikmakwana18@gmail.com...');Notif.show('System','sudo hire maitrik executed!','&#128640;');setTimeout(function(){window.open('mailto:maitrikmakwana18@gmail.com');},500);},800);}else if(j==='rm -rf /'||j==='rm -rf / --no-preserve-root'){fakeDelete(this);}else this.print('[sudo] incident will be reported.');},
+    mission:function(args){
+      if(!args||args.length===0){
+        this.print('Available Missions:');
+        this.print('1. explore_system - Discover hidden files and commands');
+        this.print('2. find_flag - Locate the hidden CTF flag');
+        this.print('3. contact_me - Send a message through the contact form');
+        this.print('Usage: mission {mission_name}');
+        return;
+      }
+      var m=args[0];
+      if(m==='explore_system'){
+        this.print('Mission: Explore the System');
+        this.print('Objective: Use terminal commands to explore the filesystem.');
+        this.print('Hint: Start with "ls" and "cat" commands.');
+        this.print('Reward: Explorer Badge');
+      } else if(m==='find_flag'){
+        this.print('Mission: Find the Flag');
+        this.print('Objective: Submit the hidden CTF flag.');
+        this.print('Hint: The flag is HTB{gh0st_1n_th3_sh3ll}');
+        this.print('Reward: Ghost in the Shell Achievement');
+      } else if(m==='contact_me'){
+        this.print('Mission: Contact Me');
+        this.print('Objective: Send a message via the contact form.');
+        this.print('Hint: Fill out the contact form in the Firefox app.');
+        this.print('Reward: Communicator Badge');
+      } else {
+        this.print('Unknown mission: '+m);
+      }
+    },
+    hint:function(args){
+      if(!args||args.length===0){
+        this.print('Usage: hint {mission_name}');
+        return;
+      }
+      var m=args[0];
+      if(m==='explore_system'){
+        this.print('Hint: Try "ls -a" to see hidden files, then "cat .bashrc"');
+      } else if(m==='find_flag'){
+        this.print('Hint: The flag starts with HTB{...}');
+      } else if(m==='contact_me'){
+        this.print('Hint: Open the Firefox app and look for the contact form.');
+      } else {
+        this.print('No hint available for: '+m);
+      }
+    },
+    solve:function(args){
+      if(!args||args.length===0){
+        this.print('Usage: solve {mission_name}');
+        return;
+      }
+      var m=args[0];
+      if(m==='explore_system'){
+        this.print('Solution: ls -a && cat .bashrc');
+        Achievement.unlock('explorer');
+      } else if(m==='find_flag'){
+        this.print('Solution: submit_flag HTB{gh0st_1n_th3_sh3ll}');
+      } else if(m==='contact_me'){
+        this.print('Solution: Open Firefox app and submit the contact form.');
+      } else {
+        this.print('No solution available for: '+m);
+      }
+    }
   }
 };
 
@@ -390,5 +457,5 @@ var MobileTerminal={
     var self=this;mIn.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();var cmd=mIn.value.trim();mIn.value='';if(cmd)self.run(cmd);}});
   },
   print:function(c,t){t=t||'text';var d=document.createElement('div');d.className='term-line';if(t==='markup')d.innerHTML=c;else d.textContent=c;if(this.output)this.output.appendChild(d);if(this.output)this.output.scrollTop=this.output.scrollHeight;},
-  run:function(cmd){this.print('<span class="t-green">$</span> '+cmd,'markup');var parts=cmd.split(' '),c=parts[0].toLowerCase(),args=parts.slice(1);var h=Terminal.commands[c];if(h){var orig=Terminal.output,origS=Terminal.scrollBottom;Terminal.output=this.output;var self=this;Terminal.scrollBottom=function(){if(self.output)self.output.scrollTop=self.output.scrollHeight;};h.call(Terminal,args);Terminal.output=orig;Terminal.scrollBottom=origS;}else this.print('command not found: '+c);}
+  run:function(cmd){this.print('<span class="t-green">$</span> '+cmd,'markup');var parts=cmd.split(' '),c=parts[0].toLowerCase(),args=parts.slice(1);var h=Terminal.commands[c];if(h){var orig=Terminal.output,origS=Terminal.scrollBottom;Terminal.output=this.output;var self=this;Terminal.scrollBottom=function(){if(self.output)self.output.scrollTop=self.output.scrollHeight;};h.call(Terminal,args);Achievement.trackCommand(c);Terminal.output=orig;Terminal.scrollBottom=origS;}else this.print('command not found: '+c);}
 };

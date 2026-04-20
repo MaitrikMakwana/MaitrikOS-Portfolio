@@ -656,7 +656,7 @@ input, textarea, button { font-family: var(--font-mono); }
 .roadmap-next .roadmap-title { color: #fff; text-transform: uppercase; letter-spacing: 0.05em; }
 
 /* ---- JSON SPECS ---- */
-.json-display { padding: 24px; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.6; color: #d4d4d4; }
+.json-display { padding: 24px; font-family: var(--font-mono); font-size: 13.5px; line-height: 1.6; color: #d4d4d4; overflow: hidden; position: relative; }
 .json-key { color: #9cdcfe; }
 .json-string { color: #ce9178; }
 .json-number { color: #b5cea8; }
@@ -920,6 +920,8 @@ body.root-mode .trail-dot { background: #ff3333; box-shadow: 0 0 6px rgba(255, 5
 .ctf-desc { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
 .ctf-score { font-size: 18px; font-weight: 700; color: var(--accent-green); font-family: var(--font-mono); min-width: 80px; text-align: right; }
 .ctf-total { margin-top: 20px; padding-top: 16px; border-top: 2px solid var(--border-default); font-size: 16px; font-weight: 700; text-align: right; }
+.ctf-entry.unlocked { background: linear-gradient(135deg, rgba(0, 255, 65, 0.1), rgba(0, 255, 65, 0.05)); border-color: var(--accent-green); }
+.ctf-entry.unlocked .ctf-name { color: var(--accent-green); }
 
 /* ---- BROWSER / CONTACT ---- */
 .browser-layout { display: flex; flex-direction: column; overflow: hidden; height: 100%; }
@@ -1079,4 +1081,214 @@ body.root-mode .ascii-logo, body.root-mode .nf-ascii { color: #ff3333; text-shad
   #arcade-win { min-height: 0; }
   #highway-canvas { max-width: min(300px, calc(100vw - 48px)); }
   .memory-grid { max-width: 100%; }
+}
+
+/* ---- CTF CHALLENGE GAME ---- */
+.ctf-challenge-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+  color: #ffffff;
+}
+
+.ctf-challenge-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.ctf-challenge-header h2 {
+  margin: 0;
+  color: #00ff41;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.ctf-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.ctf-stats span {
+  color: #888;
+}
+
+.ctf-stats .ctf-score span,
+.ctf-stats .ctf-level span {
+  color: #00ff41;
+  font-weight: 600;
+}
+
+.ctf-difficulty-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.ctf-tab {
+  padding: 8px 16px;
+  background: #2a2a3e;
+  border: 1px solid #444;
+  color: #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 14px;
+}
+
+.ctf-tab:hover {
+  background: #3a3a4e;
+  border-color: #666;
+}
+
+.ctf-tab.active {
+  background: #00ff41;
+  border-color: #00ff41;
+  color: #000;
+  font-weight: 600;
+}
+
+.ctf-challenge-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ctf-challenge-display {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 16px;
+  min-height: 200px;
+}
+
+.ctf-challenge-info h3 {
+  margin: 0 0 12px 0;
+  color: #00ff41;
+  font-size: 16px;
+}
+
+.ctf-challenge-info p {
+  margin: 0 0 12px 0;
+  color: #ccc;
+  line-height: 1.5;
+}
+
+.ctf-challenge-hints {
+  background: rgba(255, 165, 0, 0.1);
+  border: 1px solid #ff8c00;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-top: 12px;
+  display: none;
+}
+
+.ctf-challenge-hints.show {
+  display: block;
+}
+
+.ctf-input-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.ctf-input {
+  flex: 1;
+  padding: 10px 12px;
+  background: #1a1a2e;
+  border: 1px solid #444;
+  border-radius: 6px;
+  color: #fff;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+}
+
+.ctf-input:focus {
+  outline: none;
+  border-color: #00ff41;
+  box-shadow: 0 0 0 2px rgba(0, 255, 65, 0.2);
+}
+
+.ctf-submit-btn,
+.ctf-hint-btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.ctf-submit-btn {
+  background: #00ff41;
+  color: #000;
+}
+
+.ctf-submit-btn:hover {
+  background: #00cc33;
+  transform: translateY(-1px);
+}
+
+.ctf-hint-btn {
+  background: #ff8c00;
+  color: #000;
+}
+
+.ctf-hint-btn:hover {
+  background: #e67e00;
+  transform: translateY(-1px);
+}
+
+.ctf-feedback {
+  min-height: 24px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.ctf-feedback.success {
+  color: #00ff41;
+}
+
+.ctf-feedback.error {
+  color: #ff4444;
+}
+
+.ctf-feedback.hint {
+  color: #ff8c00;
+}
+
+.ctf-progress {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #333;
+}
+
+.ctf-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: #2a2a3e;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.ctf-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff41, #00cc33);
+  transition: width 0.3s ease;
+}
+
+.ctf-progress-text {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
 }

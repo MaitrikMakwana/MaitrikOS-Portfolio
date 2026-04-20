@@ -136,6 +136,7 @@
       <div class="launcher-app" onclick="OS.openApp('tools-win')"><div class="l-icon">&#128736;</div><span>Tools</span></div>
       <div class="launcher-app" onclick="OS.openApp('map-win')"><div class="l-icon">&#127757;</div><span>Threat Map</span></div>
       <div class="launcher-app" onclick="OS.openApp('ctf-win')"><div class="l-icon">&#127942;</div><span>Achievements</span></div>
+      <div class="launcher-app" onclick="OS.openApp('ctf-challenge-win')"><div class="l-icon">&#127942;</div><span>CTF Challenges</span></div>
       <div class="launcher-app" onclick="OS.openApp('contact-win')"><div class="l-icon">&#9993;</div><span>Contact Me</span></div>
       <div class="launcher-app" onclick="OS.openApp('arcade-win')"><div class="l-icon">&#127918;</div><span>Arcade</span></div>
       <div class="launcher-app" onclick="OS.openApp('logs-win')"><div class="l-icon">&#128466;</div><span>System Logs</span></div>
@@ -152,6 +153,7 @@
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('pdf-win')" tabindex="0"><div class="d-icon-img">&#128196;</div><span>resume.pdf</span></div>
     <div class="d-icon glitch-hover" ondblclick="AutoTour.start()" tabindex="0" id="btn-tour-d"><div class="d-icon-img">&#9654;&#65039;</div><span id="btn-tour">auto_tour</span></div>
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('ctf-win')" tabindex="0"><div class="d-icon-img">&#127942;</div><span>achievements</span></div>
+    <div class="d-icon glitch-hover" ondblclick="OS.openApp('ctf-challenge-win')" tabindex="0"><div class="d-icon-img">&#127942;</div><span>ctf_challenges</span></div>
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('htop-win')" tabindex="0"><div class="d-icon-img">&#128200;</div><span>htop</span></div>
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('contact-win')" tabindex="0"><div class="d-icon-img">&#9993;</div><span>contact_me</span></div>
     <div class="d-icon glitch-hover" ondblclick="OS.openApp('arcade-win')" tabindex="0"><div class="d-icon-img">&#128119;</div><span>arcade.sh</span></div>
@@ -512,6 +514,54 @@
       </div>
       <div class="win-content" style="background:#161b22;">
         <iframe src="https://drive.google.com/file/d/1v0IW0OXbamPOsnHOc-W6w4eWUeluDABY/preview" width="100%" height="100%" frameborder="0" style="border:none;"></iframe>
+      </div>
+    </div>
+
+    <!-- CTF CHALLENGE GAME -->
+    <div class="win parallax-win" id="ctf-challenge-win" data-title="CTF Challenges" data-icon="&#127942;" data-depth="0.4">
+      <div class="win-bar" data-win="ctf-challenge-win">
+        <div class="win-dots"><span class="dot dot-close" onclick="OS.close('ctf-challenge-win')"></span><span class="dot dot-min" onclick="OS.minimize('ctf-challenge-win')"></span><span class="dot dot-max" onclick="OS.maximize('ctf-challenge-win')"></span></div>
+        <div class="win-title">CTF Challenge Arena</div><div class="win-bar-right"></div>
+      </div>
+      <div class="win-content ctf-challenge-layout">
+        <div class="ctf-challenge-header">
+          <h2>&#127942; Capture The Flag</h2>
+          <div class="ctf-stats">
+            <span class="ctf-score">Score: <span id="ctf-game-score">0</span></span>
+            <span class="ctf-level">Level: <span id="ctf-current-level">Easy</span></span>
+          </div>
+        </div>
+        
+        <div class="ctf-difficulty-tabs">
+          <button class="ctf-tab active" data-difficulty="easy">Easy</button>
+          <button class="ctf-tab" data-difficulty="medium">Medium</button>
+          <button class="ctf-tab" data-difficulty="hard">Hard</button>
+        </div>
+        
+        <div class="ctf-challenge-area">
+          <div class="ctf-challenge-display" id="ctf-challenge-display">
+            <div class="ctf-challenge-info">
+              <h3 id="ctf-challenge-title">Welcome to CTF Arena</h3>
+              <p id="ctf-challenge-description">Select a difficulty level to begin your cybersecurity challenges!</p>
+              <div class="ctf-challenge-hints" id="ctf-challenge-hints"></div>
+            </div>
+          </div>
+          
+          <div class="ctf-input-area">
+            <input type="text" id="ctf-flag-input" placeholder="Enter flag here..." class="ctf-input">
+            <button id="ctf-submit-btn" class="ctf-submit-btn">Submit Flag</button>
+            <button id="ctf-hint-btn" class="ctf-hint-btn">Get Hint</button>
+          </div>
+          
+          <div class="ctf-feedback" id="ctf-feedback"></div>
+        </div>
+        
+        <div class="ctf-progress">
+          <div class="ctf-progress-bar">
+            <div class="ctf-progress-fill" id="ctf-progress-fill" style="width: 0%"></div>
+          </div>
+          <span class="ctf-progress-text">Challenges Completed: <span id="ctf-completed">0</span>/<span id="ctf-total-challenges">0</span></span>
+        </div>
       </div>
     </div>
 
